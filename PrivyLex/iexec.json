@@ -1,0 +1,19 @@
+{
+  "description": "This is PrivyLex, a decentralized AI agent for legal assistance. It provides users with legal advice and document generation capabilities using AI, while ensuring privacy and security through decentralized technologies.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "Shridhar G",
+  "social": {
+    "website": "?",
+    "github": "?"
+  },
+  "logo": "logo.png",
+  "buyConf": {},
+  "app": {
+    "owner": "0xC19F57A1339AccAa7Ff1575eF9E46F0760e52DaF",
+    "name": "hello-world",
+    "type": "DOCKER",
+    "multiaddr": "iexechub/python-hello-world:7.0.5",
+    "checksum": "0xaea3f77f09567fa0da20b86d9b7dac3ef958b7d4751a37cfa7cd7851f57ac191"
+  }
+}
