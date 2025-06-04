@@ -1,7 +1,0 @@
-name: "privylex"
-description: "AI-powered legal document analysis"
-version: "1.0.0"
-framework: "SCONE"
-image: "python:3.13.3-alpine3.21"
-env:
-  OPENAI_API_KEY: "${OPENAI_API_KEY}"

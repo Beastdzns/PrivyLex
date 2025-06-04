@@ -7,6 +7,7 @@ from openai import OpenAI
 import base64
 from io import BytesIO
 from dotenv import load_dotenv
+import protected_data
 
 load_dotenv()
 

@@ -13,14 +13,16 @@ interface UploadedFile {
   protected: boolean;
   protectedDataAddress?: string;
   fileData?: File;
+  accessGranted?: boolean;
 }
 
 export default function Home() {
-  const { isConnected } = useAccount();
+  const { isConnected, address } = useAccount();
   const { data: walletClient } = useWalletClient();
   const [dragActive, setDragActive] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
   const [isProtecting, setIsProtecting] = useState(false);
+  const [isGrantingAccess, setIsGrantingAccess] = useState(false);
   const [selectedFile, setSelectedFile] = useState<UploadedFile | null>(null);
 
   const handleDrag = (e: React.DragEvent) => {
@@ -96,7 +98,6 @@ export default function Home() {
         throw new Error('File not found');
       }
       
-      // Convert file to buffer using the recommended helper function
       const fileAsArrayBuffer = await createArrayBufferFromFile(fileToProtect.fileData);
       
       // Protect the document using iExec DataProtector core
@@ -108,6 +109,7 @@ export default function Home() {
         onStatusUpdate: ({ title, isDone }) => {
             console.log(title, isDone);
         },
+        allowDebug: true,
       });
       
       // Update the file with protected data address
@@ -116,7 +118,8 @@ export default function Home() {
           file.id === fileId ? { 
             ...file, 
             protected: true,
-            protectedDataAddress: protectedData.address
+            protectedDataAddress: protectedData.address,
+            accessGranted: false
           } : file
         )
       );
@@ -128,6 +131,49 @@ export default function Home() {
       // You might want to show an error message to the user
     } finally {
       setIsProtecting(false);
+    }
+  };
+
+  const grantAccessToDocument = async (fileId: string) => {
+    if (!walletClient || !address) {
+      console.error('Wallet not connected');
+      return;
+    }
+    
+    setIsGrantingAccess(true);
+    
+    try {
+      const providerToUse = walletClient as unknown as EIP1193Provider;
+      const iexecDataProtector = new IExecDataProtector(providerToUse);
+      
+      // Find the file to grant access to
+      const fileToGrant = uploadedFiles.find(file => file.id === fileId);
+      if (!fileToGrant || !fileToGrant.protectedDataAddress) {
+        throw new Error('Protected file not found');
+      }
+      
+      const grantedAccess = await iexecDataProtector.core.grantAccess({
+        protectedData: fileToGrant.protectedDataAddress,
+        authorizedApp: '0xD6A86508B723Cc698AB83c0cA4FA6e8F0818B970',
+        authorizedUser: address, // Use the user's wallet address
+      });
+      
+      // Update the file with access granted status
+      setUploadedFiles(prev => 
+        prev.map(file => 
+          file.id === fileId ? { 
+            ...file, 
+            accessGranted: true
+          } : file
+        )
+      );
+      
+      console.log('Access granted successfully:', grantedAccess);
+      
+    } catch (error) {
+      console.error('Error granting access:', error);
+    } finally {
+      setIsGrantingAccess(false);
     }
   };
 
@@ -234,13 +280,21 @@ export default function Home() {
                         </div>
                       </div>
                       <div className="flex items-center space-x-2">
-                        {file.protected ? (
+                        {file.accessGranted ? (
                           <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-green-500/20 text-green-400 border border-green-500/30">
                             <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                             </svg>
-                            Protected
+                            Access Granted
                           </span>
+                        ) : file.protected ? (
+                          <button
+                            onClick={() => grantAccessToDocument(file.id)}
+                            disabled={isGrantingAccess}
+                            className="px-3 py-1 text-xs bg-green-600 hover:bg-green-700 text-white rounded-full transition-colors duration-200 disabled:opacity-50"
+                          >
+                            {isGrantingAccess ? 'Granting...' : 'Grant Access'}
+                          </button>
                         ) : (
                           <button
                             onClick={() => protectDocument(file.id)}
