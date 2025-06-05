@@ -1,0 +1,7 @@
+{
+  "default": "bellecour",
+  "chains": {
+    "mainnet": {},
+    "bellecour": {}
+  }
+}
