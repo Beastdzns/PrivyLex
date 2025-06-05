@@ -1,23 +1,3 @@
-# iApp hello-world
-
-This project is an iExec Decentralized Confidential Computing serverless
-application leveraging Trusted Execution Environment (TEE).
-
-This project was scaffolded with `iapp init`.
-
-- [Quick start](#quick-start)
-  - [Prerequisites](#prerequisites)
-  - [`iapp` main commands](#iapp-main-commands)
-  - [Develop](#develop)
-  - [Test locally](#test-locally)
-  - [Deploy on iExec](#deploy-on-iexec)
-  - [Run on iExec](#run-on-iexec)
-- [Project overview](#project-overview)
-- [iApp development guidelines](#iapp-development-guidelines)
-  - [iApp inputs](#iapp-inputs)
-  - [iApp outputs](#iapp-outputs)
-  - [working with libraries](#working-with-libraries)
-
 ## Quick start
 
 ### Prerequisites
@@ -36,11 +16,6 @@ This project was scaffolded with `iapp init`.
 ### Develop
 
 `iapp init` scaffolds a ready to hack iApp template.
-
-Start hacking by editing the source code in [./src](./src/).
-
-See [iApp development guidelines](#iapp-development-guidelines) for more details
-on the iApp development framework.
 
 ### Test locally
 
