@@ -24,6 +24,7 @@ NEXT_PUBLIC_PROJECT_ID=YOUR_PROJECT_ID
 This frontend application is built around a core workflow for handling sensitive legal data:
 
 * **Secure Image/Document Upload**: Users can easily upload images (e.g., scanned legal documents, photos of contracts) or other supported document formats through a dedicated interface.
+* **Personal Document Vault**: A secure, encrypted vault is provided within the application to **store personal legal documents**. This ensures that your sensitive files are safely kept and accessible only to you, complementing the privacy features during AI processing.
 * **Granular Access Control**:
     * **Data Protection**: After uploading, users are empowered to **protect** their uploaded data. This involves linking the document to iExec's Data Protector mechanism, ensuring that the data remains confidential even when processed by the AI model.
     * **AI Access Management**: Users maintain full control over when and how their uploaded documents are accessed by the AI. They can explicitly **grant or revoke access** to the AI model for specific tasks, ensuring privacy and compliance.
@@ -41,5 +42,5 @@ This frontend application is built around a core workflow for handling sensitive
 * **Next.js**: A powerful React framework for building server-side rendered (SSR) and static web applications, providing excellent performance and developer experience.
 * **React**: For building interactive user interfaces and managing component-based architecture.
 * **TypeScript**: Enhances code quality and maintainability with static type checking.
-* **\[Your UI Library/Framework, e.g., Chakra UI, Material UI, Tailwind CSS]**: (Add if applicable) For consistent styling and UI components.
+* **TailwindCSS**: Helps style the webpages easily and more dynamically
 * **iExec SDK (Client-side integration)**: Used for interacting with the iExec network, managing data protection, and initiating iApp computations.
