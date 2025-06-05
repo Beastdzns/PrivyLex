@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
 ## Getting Started
 
-First, run the development server:
+Install the packages
+
+```bash
+npm install
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Create environment variable:
+```bash
+touch .env
+nano .env
+NEXT_PUBLIC_PROJECT_ID=YOUR_PROJECT_ID
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ✨ Key Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This frontend application is built around a core workflow for handling sensitive legal data:
 
-## Learn More
+* **Secure Image/Document Upload**: Users can easily upload images (e.g., scanned legal documents, photos of contracts) or other supported document formats through a dedicated interface.
+* **Granular Access Control**:
+    * **Data Protection**: After uploading, users are empowered to **protect** their uploaded data. This involves linking the document to iExec's Data Protector mechanism, ensuring that the data remains confidential even when processed by the AI model.
+    * **AI Access Management**: Users maintain full control over when and how their uploaded documents are accessed by the AI. They can explicitly **grant or revoke access** to the AI model for specific tasks, ensuring privacy and compliance.
+* **AI-Powered Query & Document Processing**: Once access is granted by the user, the AI model (residing in the PrivyLex iApp backend) can perform various tasks on the uploaded documents and associated queries, such as:
+    * Answering legal questions based on the document's content.
+    * Summarizing key clauses or sections.
+    * Identifying relevant legal entities or terms.
+    * Providing contextual legal guidance.
+* **Intuitive User Interface**: A clean and responsive design built with Next.js ensures a smooth user experience across devices.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🚀 Technologies Used
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* **Next.js**: A powerful React framework for building server-side rendered (SSR) and static web applications, providing excellent performance and developer experience.
+* **React**: For building interactive user interfaces and managing component-based architecture.
+* **TypeScript**: Enhances code quality and maintainability with static type checking.
+* **\[Your UI Library/Framework, e.g., Chakra UI, Material UI, Tailwind CSS]**: (Add if applicable) For consistent styling and UI components.
+* **iExec SDK (Client-side integration)**: Used for interacting with the iExec network, managing data protection, and initiating iApp computations.
